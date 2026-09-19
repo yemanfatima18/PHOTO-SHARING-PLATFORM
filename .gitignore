@@ -15,6 +15,9 @@ build/
 # Backend build
 target/
 
+# Uploads
+uploads/
+
 # Logs
 *.log
 logs/

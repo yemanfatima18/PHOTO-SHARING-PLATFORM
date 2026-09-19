@@ -15,7 +15,7 @@ export function PublicGalleryPhotosPage() {
 
   const { data: photos, isLoading, error } = useQuery({
     queryKey: ['public-gallery-photos', token],
-    queryFn: () => galleryApi.getPublicPhotos(accessToken!),
+    queryFn: () => galleryApi.getPublicPhotos(token!, accessToken!),
     enabled: !!accessToken && !!token,
     retry: false,
   });

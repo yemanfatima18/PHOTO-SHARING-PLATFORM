@@ -57,7 +57,7 @@ export const galleryApi = {
   unpublish: (eventId: string) => api.post(`/events/${eventId}/gallery/unpublish`).then(r => r.data),
   verifyPin: (token: string, data: PinVerifyRequest) => api.post<PinVerifyResponse>(`/public/galleries/${token}/verify`, data).then(r => r.data),
   getPublicInfo: (token: string) => api.get<PublicGalleryInfo>(`/public/galleries/${token}`).then(r => r.data),
-  getPublicPhotos: (accessToken: string) => api.get<PublicGalleryPhoto[]>(`/public/galleries/${accessToken}/photos`, {
+  getPublicPhotos: (galleryToken: string, accessToken: string) => api.get<PublicGalleryPhoto[]>(`/public/galleries/${galleryToken}/photos`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   }).then(r => r.data),
   getPublicPhoto: (token: string, photoId: string, accessToken: string) => api.get(`/public/galleries/${token}/photos/${photoId}`, {
