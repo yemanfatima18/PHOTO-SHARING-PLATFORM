@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: photoshare-backend
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017}
+      database: ${MONGODB_DATABASE:photoshare}
+      auto-index-creation: true
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:your-super-secret-jwt-key-change-in-production-min-256-bits}
+    expiration: ${JWT_EXPIRATION:86400000} # 24 hours in milliseconds
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
+
+  storage:
+    path: ${PHOTO_STORAGE_PATH:./uploads}
+    max-file-size: ${MAX_FILE_SIZE:52428800} # 50MB
+    allowed-content-types: image/jpeg,image/jpg,image/png,image/webp
+
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:3000}
+
+  gallery:
+    pin-length: 6
+    access-token-expiration: ${GALLERY_ACCESS_EXPIRATION:3600} # 1 hour
+    max-pin-attempts: 5
+    pin-lockout-duration: ${PIN_LOCKOUT_DURATION:900} # 15 minutes
+
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5174}
+
+logging:
+  level:
+    com.photoshare: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.data.mongodb: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
